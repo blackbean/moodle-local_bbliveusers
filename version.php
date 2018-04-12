@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || exit(0);
  *
  */
 $plugin->component = 'local_bbliveusers';
-$plugin->release = '1.0.4';
-$plugin->version = 20180318104;
+$plugin->release = '1.0.0';
+$plugin->version = 2018041200;
 $plugin->maturity = MATURITY_BETA;
 $plugin->requires = 2016052311;
