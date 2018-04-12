@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of BlackBean Live Users (https://github.com/blackbean/BBLiveUsers),
+ * This file is part of BlackBean LiveUsers (https://github.com/blackbean/BBLiveUsers),
  * a plugin for Moodle LMS Platform (https://www.moodle.org), that monitors the exact
  * number of online users per course, even if they spend hours watching a video, for
  * example, without ever refreshing any page.]Copyright (C) 2018 by BlackBean Ltda.
