@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="tool/bbliveusers/db" VERSION="20180320" COMMENT="XMLDB file for BBLiveUsers"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+	<TABLES>
+		<TABLE NAME="bbliveusers" COMMENT="">
+			<FIELDS>
+				<FIELD NAME="course_id" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+				<FIELD NAME="user_id" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+				<FIELD NAME="user_time" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+			</FIELDS>
+			<KEYS>
+				<KEY NAME="bbliveusers_a" TYPE="primary" FIELDS="course_id,user_id,user_time" COMMENT=""/>
+			</KEYS>
+			<INDEXES>
+				<KEY NAME="bbliveusers_b" UNIQUE="false" FIELDS="user_time" COMMENT=""/>
+				<KEY NAME="bbliveusers_c" UNIQUE="false" FIELDS="course_id,user_time" COMMENT=""/>
+			</INDEXES>
+		</TABLE>
+	</TABLES>
+</XMLDB>
