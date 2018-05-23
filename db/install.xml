@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="tool/bbliveusers/db" VERSION="20180320" COMMENT="XMLDB file for BBLiveUsers"
+<XMLDB PATH="local/bbliveusers/db" VERSION="2018052300" COMMENT="XMLDB file for LiveUsers"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>

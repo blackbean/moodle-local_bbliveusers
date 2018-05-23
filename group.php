@@ -22,29 +22,17 @@
  */
 define('AJAX_SCRIPT', true);
 
-/**
- *
- */
 require_once(__DIR__.'/../../config.php');
 require_once(__DIR__.'/locallib.php');
 
-/**
- *
- */
 require_login();
 
-/**
- *
- */
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $limit = optional_param('limit', 60, PARAM_INT);
 $time = time();
 $data = bbliveusers::group_liveusers($courseid, ($time - $limit), $time);
 $data = json_encode(array_values($data));
 
-/**
- *
- */
 header('HTTP/1.0 200 OK');
 header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-cache, no-store, must-revalidate');

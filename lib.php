@@ -14,39 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || exit(0);
+
 /**
  * @package local_bbliveusers
  * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
  * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-defined('MOODLE_INTERNAL') || exit(0);
-
-/**
- *
- */
-function local_bbliveusers_extend_navigation_course()
-{
-    /**
-     *
-     */
+function local_bbliveusers_extend_navigation_course() {
     global $COURSE, $USER, $PAGE, $CFG;
 
-    /**
-     *
-     */
-    if(isset($PAGE))
-    {
-        /**
-         *
-         */
+    if(isset($PAGE)) {
         $courseid = isset($COURSE->id) ? max(0, (integer)$COURSE->id) : 0;
         $userid = isset($USER->id) ? max(0, (integer)$USER->id) : 0;
         $limit = intval(time() + $CFG->sessiontimeout);
 
-        /**
-         *
-         */
         echo("\n\n");
         echo('<script>
 var bbliveusers_limit='.$limit.';

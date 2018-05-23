@@ -14,32 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || exit(0);
+
 /**
  * @package local_bbliveusers
  * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
  * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-defined('MOODLE_INTERNAL') || exit(0);
-
-/**
- *
- */
 $string['Ymd'] = 'Y-m-d';
 $string['His'] = 'H:i:s';
 $string['YmdHis'] = 'Y-m-d H:i:s';
-
-/**
- *
- */
 $string['pluginname'] = 'Usuários ao vivo';
 $string['bbliveusers'] = 'Usuários ao vivo';
 $string['local/bbliveusers'] = 'Usuários ao vivo';
 $string['local_bbliveusers'] = 'Usuários ao vivo';
-
-/**
- *
- */
 $string['bbliveusers:export'] = 'Exportar';
 $string['local/bbliveusers:export'] = 'Exportar';
 $string['local_bbliveusers:export'] = 'Exportar';

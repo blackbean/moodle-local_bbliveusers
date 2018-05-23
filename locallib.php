@@ -14,16 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || exit(0);
+
 /**
  * @package local_bbliveusers
  * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
  * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
  * @license http://www.gnu.org/copyleft/gpl.html
- */
-defined('MOODLE_INTERNAL') || exit(0);
-
-/**
- *
  */
 class bbliveusers
 {
@@ -35,62 +32,35 @@ class bbliveusers
      * @param integer $step
      * @return boolean
      */
-    public static function store_liveuser($courseid = 0, $userid = 0, $step = 20)
-    {
-        /**
-         *
-         */
+    public static function store_liveuser($courseid = 0, $userid = 0, $step = 20) {
         global $DB;
 
-        /**
-         *
-         */
         $courseid = max(0, (integer)$courseid);
         $userid = max(0, (integer)$userid);
         $step = max(20, (integer)$step);
         $usertime = time();
         $usertime = ($usertime - ($usertime % $step));
 
-        /**
-         *
-         */
         if($courseid == 0 or
             $courseid == 1 or
-            $userid == 0)
-        {
+            $userid == 0) {
             return(false);
         }
 
-        /**
-         *
-         */
         $sql = "SELECT 1 ".
                 "FROM {bbliveusers} AS tb1 ".
                 "WHERE tb1.courseid=? ".
                 "AND tb1.userid=? ".
                 "AND tb1.usertime=?";
 
-        /**
-         *
-         */
-        if($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false)
-        {
-            /**
-             *
-             */
+        if($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false) {
             $sql = "INSERT INTO {bbliveusers} ".
                     "(courseid,userid,usertime) ".
                     "VALUES (?,?,?)";
 
-            /**
-             *
-             */
             $DB->execute($sql, [$courseid, $userid, $usertime]);
         }
 
-        /**
-         *
-         */
         return(true);
     }
 
@@ -103,16 +73,9 @@ class bbliveusers
      * @param integer $step
      * @return integer
      */
-    public static function count_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
-    {
-        /**
-         *
-         */
+    public static function count_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20) {
         global $DB;
 
-        /**
-         *
-         */
         $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
@@ -120,55 +83,27 @@ class bbliveusers
         $start = ($start - ($start % $step));
         $stop = ($stop - ($stop % $step));
 
-        /**
-         *
-         */
-        if($courseid > 1)
-        {
-            /**
-             *
-             */
+        if($courseid > 1) {
             $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
                     "WHERE tb1.courseid=? ".
                     "AND tb1.usertime>=? ".
                     "AND tb1.usertime<=?";
 
-            /**
-             *
-             */
             $params = [$courseid, $start, $stop];
-        }
-        else
-        {
-            /**
-             *
-             */
+        } else {
             $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
                     "WHERE tb1.usertime>=? ".
                     "AND tb1.usertime<=?";
 
-            /**
-             *
-             */
             $params = [$start, $stop];
         }
 
-        /**
-         *
-         */
-        if($result = $DB->get_record_sql($sql, $params))
-        {
-            /**
-             *
-             */
+        if($result = $DB->get_record_sql($sql, $params)) {
             return((integer)$result->total);
         }
 
-        /**
-         *
-         */
         return(0);
     }
 
@@ -181,16 +116,9 @@ class bbliveusers
      * @param integer $step
      * @return array
      */
-    public static function fetch_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
-    {
-        /**
-         *
-         */
+    public static function fetch_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20) {
         global $DB;
 
-        /**
-         *
-         */
         $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
@@ -199,14 +127,7 @@ class bbliveusers
         $stop = ($stop - ($stop % $step));
         $users = [];
 
-        /**
-         *
-         */
-        if($courseid > 1)
-        {
-            /**
-             *
-             */
+        if($courseid > 1) {
             $sql = "SELECT tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname,".
@@ -225,16 +146,8 @@ class bbliveusers
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
 
-            /**
-             *
-             */
             $params = [$courseid, $start, $stop];
-        }
-        else
-        {
-            /**
-             *
-             */
+        } else {
             $sql = "SELECT tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname,".
@@ -252,25 +165,11 @@ class bbliveusers
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
 
-            /**
-             *
-             */
             $params = [$start, $stop];
         }
 
-        /**
-         *
-         */
-        if($results = $DB->get_records_sql($sql, $params))
-        {
-            /**
-             *
-             */
-            foreach($results as $result)
-            {
-                /**
-                 *
-                 */
+        if($results = $DB->get_records_sql($sql, $params)) {
+            foreach($results as $result) {
                 $user = new stdclass();
                 $user->id = (integer)$result->id;
                 $user->firstname = (string)$result->firstname;
@@ -280,16 +179,10 @@ class bbliveusers
                 $user->total = (integer)$result->total;
                 $user->count = (integer)$result->count;
 
-                /**
-                 *
-                 */
                 $users[$user->id] = $user;
             }
         }
 
-        /**
-         *
-         */
         return($users);
     }
 
@@ -302,16 +195,9 @@ class bbliveusers
      * @param integer $step
      * @return array
      */
-    public static function group_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
-    {
-        /**
-         *
-         */
+    public static function group_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20) {
         global $DB;
 
-        /**
-         *
-         */
         $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
@@ -320,14 +206,7 @@ class bbliveusers
         $stop = ($stop - ($stop % $step));
         $stats = [];
 
-        /**
-         *
-         */
-        if($courseid > 1)
-        {
-            /**
-             *
-             */
+        if($courseid > 1) {
             $sql = "SELECT (tb1.usertime-(tb1.usertime%".$step.")) AS time,".
                         "MIN(tb1.usertime) AS first,".
                         "MAX(tb1.usertime) AS last,".
@@ -338,16 +217,8 @@ class bbliveusers
                     "AND tb1.usertime<=? ".
                     "GROUP BY (tb1.usertime-(tb1.usertime%".$step."))";
 
-            /**
-             *
-             */
             $params = [$courseid, $start, $stop];
-        }
-        else
-        {
-            /**
-             *
-             */
+        } else {
             $sql = "SELECT (tb1.usertime-(tb1.usertime%".$step.")) AS time,".
                         "MIN(tb1.usertime) AS first,".
                         "MAX(tb1.usertime) AS last,".
@@ -357,42 +228,21 @@ class bbliveusers
                     "AND tb1.usertime<=? ".
                     "GROUP BY (tb1.usertime-(tb1.usertime%".$step."))";
 
-            /**
-             *
-             */
             $params = [$start, $stop];
         }
 
-
-        /**
-         *
-         */
-        if($results = $DB->get_records_sql($sql, $params))
-        {
-            /**
-             *
-             */
-            foreach($results as $result)
-            {
-                /**
-                 *
-                 */
+        if($results = $DB->get_records_sql($sql, $params)) {
+            foreach($results as $result) {
                 $stat = new stdclass();
                 $stat->time = (integer)$result->time;
                 $stat->first = (integer)$result->first;
                 $stat->last = (integer)$result->last;
                 $stat->total = (integer)$result->total;
 
-                /**
-                 *
-                 */
                 $stats[$stat->time] = $stat;
             }
         }
 
-        /**
-         *
-         */
         return($stats);
     }
 }
