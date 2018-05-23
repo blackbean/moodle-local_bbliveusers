@@ -25,8 +25,7 @@ defined('MOODLE_INTERNAL') || exit(0);
 /**
  * @return boolean
  */
-function xmldb_local_bbliveusers_uninstall()
-{
+function xmldb_local_bbliveusers_uninstall() {
     /**
      *
      */

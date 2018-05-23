@@ -26,8 +26,7 @@ defined('MOODLE_INTERNAL') || exit(0);
  * @param integer $oldversion
  * @return boolean
  */
-function xmldb_local_bbliveusers_upgrade($oldversion)
-{
+function xmldb_local_bbliveusers_upgrade($oldversion) {
     /**
      *
      */

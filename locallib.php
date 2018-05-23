@@ -197,7 +197,6 @@ class bbliveusers
         $step = max(20, (integer)$step);
         $start = ($start - ($start % $step));
         $stop = ($stop - ($stop % $step));
-        $time = time();
         $users = [];
 
         /**
@@ -319,7 +318,6 @@ class bbliveusers
         $step = max(20, (integer)$step);
         $start = ($start - ($start % $step));
         $stop = ($stop - ($stop % $step));
-        $time = time();
         $stats = [];
 
         /**
