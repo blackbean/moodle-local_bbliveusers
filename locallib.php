@@ -26,12 +26,12 @@ class bbliveusers
     /**
      * [store_liveuser]
      * 
-     * @param integer $course_id
-     * @param integer $user_id
+     * @param integer $courseid
+     * @param integer $userid
      * @param integer $step
      * @return boolean
      */
-    public static function store_liveuser($course_id = 0, $user_id = 0, $step = 20)
+    public static function store_liveuser($courseid = 0, $userid = 0, $step = 20)
     {
         /**
          * 
@@ -41,18 +41,18 @@ class bbliveusers
         /**
          * 
          */
-        $course_id = max(0, (integer)$course_id);
-        $user_id = max(0, (integer)$user_id);
+        $courseid = max(0, (integer)$courseid);
+        $userid = max(0, (integer)$userid);
         $step = max(20, (integer)$step);
-        $user_time = time();
-        $user_time = ($user_time - ($user_time % $step));
+        $usertime = time();
+        $usertime = ($usertime - ($usertime % $step));
 
         /**
          * 
          */
-        if($course_id == 0 or 
-            $course_id == 1 or 
-            $user_id == 0)
+        if($courseid == 0 or 
+            $courseid == 1 or 
+            $userid == 0)
         {
             return(false);
         }
@@ -62,26 +62,26 @@ class bbliveusers
          */
         $sql = "SELECT 1 ".
                 "FROM {bbliveusers} AS tb1 ".
-                "WHERE tb1.course_id=? ".
-                "AND tb1.user_id=? ".
-                "AND tb1.user_time=?";
+                "WHERE tb1.courseid=? ".
+                "AND tb1.userid=? ".
+                "AND tb1.usertime=?";
 
         /**
          *
          */
-        if($DB->get_field_sql($sql, [$course_id, $user_id, $user_time]) == false)
+        if($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false)
         {
             /**
              * 
              */
             $sql = "INSERT INTO {bbliveusers} ".
-                    "(course_id,user_id,user_time) ".
+                    "(courseid,userid,usertime) ".
                     "VALUES (?,?,?)";
 
             /**
              * 
              */
-            $DB->execute($sql, [$course_id, $user_id, $user_time]);
+            $DB->execute($sql, [$courseid, $userid, $usertime]);
         }
 
         /**
@@ -93,13 +93,13 @@ class bbliveusers
     /**
      * [count_liveusers]
      * 
-     * @param integer $course_id
+     * @param integer $courseid
      * @param integer $start
      * @param integer $stop
      * @param integer $step
      * @return integer
      */
-    public static function count_liveusers($course_id = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
+    public static function count_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
     {
         /**
          * 
@@ -109,7 +109,7 @@ class bbliveusers
         /**
          * 
          */
-        $course_id = max(0, (integer)$course_id);
+        $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
         $step = max(20, (integer)$step);
@@ -119,31 +119,31 @@ class bbliveusers
         /**
          * 
          */
-        if($course_id > 1)
+        if($courseid > 1)
         {
             /**
              * 
              */
-            $sql = "SELECT COUNT(DISTINCT tb1.user_id) AS total ".
+            $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
-                    "WHERE tb1.course_id=? ".
-                    "AND tb1.user_time>=? ".
-                    "AND tb1.user_time<=?";
+                    "WHERE tb1.courseid=? ".
+                    "AND tb1.usertime>=? ".
+                    "AND tb1.usertime<=?";
 
             /**
              * 
              */
-            $params = [$course_id, $start, $stop];
+            $params = [$courseid, $start, $stop];
         }
         else
         {
             /**
              * 
              */
-            $sql = "SELECT COUNT(DISTINCT tb1.user_id) AS total ".
+            $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
-                    "WHERE tb1.user_time>=? ".
-                    "AND tb1.user_time<=?";
+                    "WHERE tb1.usertime>=? ".
+                    "AND tb1.usertime<=?";
 
             /**
              * 
@@ -171,13 +171,13 @@ class bbliveusers
     /**
      * [fetch_liveusers]
      * 
-     * @param integer $course_id
+     * @param integer $courseid
      * @param integer $start
      * @param integer $stop
      * @param integer $step
      * @return array
      */
-    public static function fetch_liveusers($course_id = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
+    public static function fetch_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
     {
         /**
          * 
@@ -187,7 +187,7 @@ class bbliveusers
         /**
          * 
          */
-        $course_id = max(0, (integer)$course_id);
+        $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
         $step = max(20, (integer)$step);
@@ -199,7 +199,7 @@ class bbliveusers
         /**
          * 
          */
-        if($course_id > 1)
+        if($courseid > 1)
         {
             /**
              * 
@@ -207,17 +207,17 @@ class bbliveusers
             $sql = "SELECT tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname,".
-                        "MIN(tb1.user_time) AS first,".
-                        "MAX(tb1.user_time) AS last,".
-                        "(MAX(tb1.user_time) - MIN(tb1.user_time)) AS total,".
-                        "COUNT(DISTINCT tb1.user_time) AS count ".
+                        "MIN(tb1.usertime) AS first,".
+                        "MAX(tb1.usertime) AS last,".
+                        "(MAX(tb1.usertime) - MIN(tb1.usertime)) AS total,".
+                        "COUNT(DISTINCT tb1.usertime) AS count ".
                     "FROM {bbliveusers} AS tb1 ".
                     "INNER JOIN {user} AS tb2 ".
-                    "ON tb2.id=tb1.user_id ".
-                    "WHERE tb1.course_id=? ".
-                    "AND tb1.user_time>=? ".
-                    "AND tb1.user_time<=? ".
-                    "GROUP BY tb1.user_id,".
+                    "ON tb2.id=tb1.userid ".
+                    "WHERE tb1.courseid=? ".
+                    "AND tb1.usertime>=? ".
+                    "AND tb1.usertime<=? ".
+                    "GROUP BY tb1.userid,".
                         "tb2.firstname,".
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
@@ -225,7 +225,7 @@ class bbliveusers
             /**
              * 
              */
-            $params = [$course_id, $start, $stop];
+            $params = [$courseid, $start, $stop];
         }
         else
         {
@@ -235,16 +235,16 @@ class bbliveusers
             $sql = "SELECT tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname,".
-                        "MIN(tb1.user_time) AS first,".
-                        "MAX(tb1.user_time) AS last,".
-                        "(MAX(tb1.user_time) - MIN(tb1.user_time)) AS total,".
-                        "COUNT(DISTINCT tb1.user_time) AS count ".
+                        "MIN(tb1.usertime) AS first,".
+                        "MAX(tb1.usertime) AS last,".
+                        "(MAX(tb1.usertime) - MIN(tb1.usertime)) AS total,".
+                        "COUNT(DISTINCT tb1.usertime) AS count ".
                     "FROM {bbliveusers} AS tb1 ".
                     "INNER JOIN {user} AS tb2 ".
-                    "ON tb2.id=tb1.user_id ".
-                    "WHERE tb1.user_time>=? ".
-                    "AND tb1.user_time<=? ".
-                    "GROUP BY tb1.user_id,".
+                    "ON tb2.id=tb1.userid ".
+                    "WHERE tb1.usertime>=? ".
+                    "AND tb1.usertime<=? ".
+                    "GROUP BY tb1.userid,".
                         "tb2.firstname,".
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
@@ -293,13 +293,13 @@ class bbliveusers
     /**
      * [group_liveusers]
      * 
-     * @param integer $course_id
+     * @param integer $courseid
      * @param integer $start
      * @param integer $stop
      * @param integer $step
      * @return array
      */
-    public static function group_liveusers($course_id = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
+    public static function group_liveusers($courseid = 0, $start = 0, $stop = PHP_INT_MAX, $step = 20)
     {
         /**
          * 
@@ -309,7 +309,7 @@ class bbliveusers
         /**
          * 
          */
-        $course_id = max(0, (integer)$course_id);
+        $courseid = max(0, (integer)$courseid);
         $start = max(0, (integer)$start);
         $stop = max(0, (integer)$stop);
         $step = max(20, (integer)$step);
@@ -321,39 +321,39 @@ class bbliveusers
         /**
          * 
          */
-        if($course_id > 1)
+        if($courseid > 1)
         {
             /**
              * 
              */
-            $sql = "SELECT (tb1.user_time-(tb1.user_time%".$step.")) AS time,".
-                        "MIN(tb1.user_time) AS first,".
-                        "MAX(tb1.user_time) AS last,".
-                        "COUNT(DISTINCT tb1.user_id) AS total ".
+            $sql = "SELECT (tb1.usertime-(tb1.usertime%".$step.")) AS time,".
+                        "MIN(tb1.usertime) AS first,".
+                        "MAX(tb1.usertime) AS last,".
+                        "COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
-                    "WHERE tb1.course_id=? ".
-                    "AND tb1.user_time>=? ".
-                    "AND tb1.user_time<=? ".
-                    "GROUP BY (tb1.user_time-(tb1.user_time%".$step."))";
+                    "WHERE tb1.courseid=? ".
+                    "AND tb1.usertime>=? ".
+                    "AND tb1.usertime<=? ".
+                    "GROUP BY (tb1.usertime-(tb1.usertime%".$step."))";
 
             /**
              * 
              */
-            $params = [$course_id, $start, $stop];
+            $params = [$courseid, $start, $stop];
         }
         else
         {
             /**
              * 
              */
-            $sql = "SELECT (tb1.user_time-(tb1.user_time%".$step.")) AS time,".
-                        "MIN(tb1.user_time) AS first,".
-                        "MAX(tb1.user_time) AS last,".
-                        "COUNT(DISTINCT tb1.user_id) AS total ".
+            $sql = "SELECT (tb1.usertime-(tb1.usertime%".$step.")) AS time,".
+                        "MIN(tb1.usertime) AS first,".
+                        "MAX(tb1.usertime) AS last,".
+                        "COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
-                    "WHERE tb1.user_time>=? ".
-                    "AND tb1.user_time<=? ".
-                    "GROUP BY (tb1.user_time-(tb1.user_time%".$step."))";
+                    "WHERE tb1.usertime>=? ".
+                    "AND tb1.usertime<=? ".
+                    "GROUP BY (tb1.usertime-(tb1.usertime%".$step."))";
 
             /**
              * 

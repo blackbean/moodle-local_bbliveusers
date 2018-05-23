@@ -37,13 +37,13 @@ require_login();
 /**
  * 
  */
-$course_id = optional_param('course_id', 0, PARAM_INT);
-$user_id = optional_param('user_id', 0, PARAM_INT);
+$courseid = optional_param('courseid', 0, PARAM_INT);
+$userid = optional_param('userid', 0, PARAM_INT);
 
 /**
  * 
  */
-if(bbliveusers::store_liveuser($course_id, $user_id))
+if(bbliveusers::store_liveuser($courseid, $userid))
 {
     /**
      * 

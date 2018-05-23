@@ -37,10 +37,10 @@ require_login();
 /**
  * 
  */
-$course_id = optional_param('course_id', 0, PARAM_INT);
+$courseid = optional_param('courseid', 0, PARAM_INT);
 $limit = optional_param('limit', 60, PARAM_INT);
 $time = time();
-$data = bbliveusers::fetch_liveusers($course_id, ($time - $limit), $time);
+$data = bbliveusers::fetch_liveusers($courseid, ($time - $limit), $time);
 $data = json_encode(array_values($data));
 
 /**

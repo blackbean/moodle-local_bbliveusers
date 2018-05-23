@@ -26,7 +26,7 @@ function local_bbliveusers_extend_navigation_course()
     /**
      * 
      */
-    global $COURSE, $USER, $PAGE;
+    global $COURSE, $USER, $PAGE, $CFG;
 
     /**
      * 
@@ -36,22 +36,27 @@ function local_bbliveusers_extend_navigation_course()
         /**
          * 
          */
-        $course_id = isset($COURSE->id) ? max(0, (integer)$COURSE->id) : 0;
-        $user_id = isset($USER->id) ? max(0, (integer)$USER->id) : 0;
+        $courseid = isset($COURSE->id) ? max(0, (integer)$COURSE->id) : 0;
+        $userid = isset($USER->id) ? max(0, (integer)$USER->id) : 0;
+        $limit = intval(time() + $CFG->sessiontimeout);
 
         /**
          * 
          */
         echo("\n\n");
         echo('<script>
+var bbliveusers_limit='.$limit.';
 window.setInterval(function(){
-    if(window.XMLHttpRequest){
-        request = new XMLHttpRequest();
-    }else{
-        request = new ActiveXObject("Microsoft.XMLHTTP");
+    var bbliveusers_time=((Date.now() % 1000) / 1000);
+    if(bbliveusers_time<=bbliveusers_limit){
+        if(window.XMLHttpRequest){
+            request = new XMLHttpRequest();
+        }else{
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        request.open("GET","/local/bbliveusers/ping.php?courseid='.$courseid.'&userid='.$userid.'",true);
+        request.send();
     }
-    request.open("GET","/local/bbliveusers/ping.php?course_id='.$course_id.'&user_id='.$user_id.'",true);
-    request.send();
 },10000);
 </script>');
         echo("\n\n");
