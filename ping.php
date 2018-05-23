@@ -23,29 +23,29 @@
 define('AJAX_SCRIPT', true);
 
 /**
- * 
+ *
  */
 require_once(__DIR__.'/../../config.php');
 require_once(__DIR__.'/locallib.php');
 
 /**
- * 
+ *
  */
 require_login();
 
 /**
- * 
+ *
  */
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $userid = optional_param('userid', 0, PARAM_INT);
 
 /**
- * 
+ *
  */
 if(bbliveusers::store_liveuser($courseid, $userid))
 {
     /**
-     * 
+     *
      */
     header('HTTP/1.0 200 OK');
     header('Content-Type: application/json; charset=UTF-8');
@@ -60,7 +60,7 @@ if(bbliveusers::store_liveuser($courseid, $userid))
 }
 
 /**
- * 
+ *
  */
 header('HTTP/1.0 503 Service Unavailable');
 header('Content-Type: application/json; charset=UTF-8');
