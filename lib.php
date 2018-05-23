@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || exit(0);
 function local_bbliveusers_extend_navigation_course() {
     global $COURSE, $USER, $PAGE, $CFG;
 
-    if(isset($PAGE)) {
+    if (isset($PAGE)) {
         $courseid = isset($COURSE->id) ? max(0, (integer)$COURSE->id) : 0;
         $userid = isset($USER->id) ? max(0, (integer)$USER->id) : 0;
         $limit = intval(time() + $CFG->sessiontimeout);

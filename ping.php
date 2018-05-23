@@ -30,7 +30,7 @@ require_login();
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $userid = optional_param('userid', 0, PARAM_INT);
 
-if(bbliveusers::store_liveuser($courseid, $userid)) {
+if (bbliveusers::store_liveuser($courseid, $userid)) {
     header('HTTP/1.0 200 OK');
     header('Content-Type: application/json; charset=UTF-8');
     header('Cache-Control: no-cache, no-store, must-revalidate');

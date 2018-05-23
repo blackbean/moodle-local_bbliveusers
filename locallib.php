@@ -41,7 +41,7 @@ class bbliveusers
         $usertime = time();
         $usertime = ($usertime - ($usertime % $step));
 
-        if($courseid == 0 or
+        if ($courseid == 0 or
             $courseid == 1 or
             $userid == 0) {
             return(false);
@@ -53,7 +53,7 @@ class bbliveusers
                 "AND tb1.userid=? ".
                 "AND tb1.usertime=?";
 
-        if($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false) {
+        if ($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false) {
             $sql = "INSERT INTO {bbliveusers} ".
                     "(courseid,userid,usertime) ".
                     "VALUES (?,?,?)";
@@ -83,7 +83,7 @@ class bbliveusers
         $start = ($start - ($start % $step));
         $stop = ($stop - ($stop % $step));
 
-        if($courseid > 1) {
+        if ($courseid > 1) {
             $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
                     "FROM {bbliveusers} AS tb1 ".
                     "WHERE tb1.courseid=? ".
@@ -100,7 +100,7 @@ class bbliveusers
             $params = [$start, $stop];
         }
 
-        if($result = $DB->get_record_sql($sql, $params)) {
+        if ($result = $DB->get_record_sql($sql, $params)) {
             return((integer)$result->total);
         }
 
@@ -127,7 +127,7 @@ class bbliveusers
         $stop = ($stop - ($stop % $step));
         $users = [];
 
-        if($courseid > 1) {
+        if ($courseid > 1) {
             $sql = "SELECT tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname,".
@@ -168,8 +168,8 @@ class bbliveusers
             $params = [$start, $stop];
         }
 
-        if($results = $DB->get_records_sql($sql, $params)) {
-            foreach($results as $result) {
+        if ($results = $DB->get_records_sql($sql, $params)) {
+            foreach ($results as $result) {
                 $user = new stdclass();
                 $user->id = (integer)$result->id;
                 $user->firstname = (string)$result->firstname;
@@ -206,7 +206,7 @@ class bbliveusers
         $stop = ($stop - ($stop % $step));
         $stats = [];
 
-        if($courseid > 1) {
+        if ($courseid > 1) {
             $sql = "SELECT (tb1.usertime-(tb1.usertime%".$step.")) AS time,".
                         "MIN(tb1.usertime) AS first,".
                         "MAX(tb1.usertime) AS last,".
@@ -231,8 +231,8 @@ class bbliveusers
             $params = [$start, $stop];
         }
 
-        if($results = $DB->get_records_sql($sql, $params)) {
-            foreach($results as $result) {
+        if ($results = $DB->get_records_sql($sql, $params)) {
+            foreach ($results as $result) {
                 $stat = new stdclass();
                 $stat->time = (integer)$result->time;
                 $stat->first = (integer)$result->first;
