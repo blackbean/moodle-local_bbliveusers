@@ -21,11 +21,6 @@
  * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-require_once(__DIR__.'/lib/bbliveusers.php');
-
-/**
- * 
- */
 function local_bbliveusers_extend_navigation_course()
 {
     /**

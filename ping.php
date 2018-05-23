@@ -18,7 +18,7 @@
 /**
  * @package local_bbliveusers
  * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
- * @copyright 2018 by BlackBean Technologies Ltda <https://www.blackbean.com.br>
+ * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 define('AJAX_SCRIPT', true);
@@ -27,7 +27,7 @@ define('AJAX_SCRIPT', true);
  * 
  */
 require_once(__DIR__.'/../../config.php');
-require_once(__DIR__.'/lib.php');
+require_once(__DIR__.'/locallib.php');
 
 /**
  * 

@@ -24,132 +24,6 @@
 class bbliveusers
 {
     /**
-     * [get_categories]
-     * 
-     * @param integer $category_id
-     * @return array
-     */
-    public static function get_categories($category_id = 0)
-    {
-        /**
-         * 
-         */
-        global $DB;
-        
-        /**
-         * 
-         */
-        $category_id = max(0, (integer)$category_id);
-
-        /**
-         *
-         */
-        $categories = [];
-
-        /**
-         * 
-         */
-        $sql = "SELECT tb1.id,".
-                    "tb1.name AS name ".
-                "FROM {course_categories} AS tb1 ".
-                "WHERE tb1.parent=? ".
-                "AND tb1.visible=1 ".
-                "ORDER BY tb1.sortorder ASC";
-
-        /**
-         *
-         */
-        if($results = $DB->get_records_sql($sql, [$category_id]))
-        {
-            /**
-             *
-             */
-            foreach($results as $result)
-            {
-                /**
-                 *
-                 */
-                $category = new stdclass();
-                $category->id = (integer)$result->id;
-                $category->name = (string)$result->name;
-
-                /**
-                 *
-                 */
-                $categories[$category->id] = $category;
-            }
-        }
-
-        /**
-         * 
-         */
-        return($categories);
-    }
-
-    /**
-     * [get_courses]
-     * 
-     * @param integer $category_id
-     * @return array
-     */
-    public static function get_courses($category_id = 0)
-    {
-        /**
-         * 
-         */
-        global $DB;
-        
-        /**
-         * 
-         */
-        $category_id = max(0, (integer)$category_id);
-
-        /**
-         *
-         */
-        $courses = [];
-
-        /**
-         * 
-         */
-        $sql = "SELECT tb1.id,".
-                    "tb1.fullname AS name ".
-                "FROM {course} AS tb1 ".
-                "WHERE tb1.category=? ".
-                "AND tb1.visible=1 ".
-                "ORDER BY tb1.sortorder ASC";
-
-        /**
-         *
-         */
-        if($results = $DB->get_records_sql($sql, [$category_id]))
-        {
-            /**
-             *
-             */
-            foreach($results as $result)
-            {
-                /**
-                 *
-                 */
-                $course = new stdclass();
-                $course->id = (integer)$result->id;
-                $course->name = (string)$result->name;
-
-                /**
-                 *
-                 */
-                $courses[$course->id] = $course;
-            }
-        }
-
-        /**
-         * 
-         */
-        return($courses);
-    }
-
-    /**
      * [store_liveuser]
      * 
      * @param integer $course_id
@@ -186,14 +60,34 @@ class bbliveusers
         /**
          * 
          */
-        $sql = "REPLACE INTO {bbliveusers} ".
-                "(course_id,user_id,user_time) ".
-                "VALUES (?,?,?)";
+        $sql = "SELECT 1 ".
+                "FROM {bbliveusers} AS tb1 ".
+                "WHERE tb1.course_id=? ".
+                "AND tb1.user_id=? ".
+                "AND tb1.user_time=?";
 
         /**
-         * 
+         *
          */
-        return($DB->execute($sql, [$course_id, $user_id, $user_time]));
+        if($DB->get_field_sql($sql, [$course_id, $user_id, $user_time]) == false)
+        {
+            /**
+             * 
+             */
+            $sql = "INSERT INTO {bbliveusers} ".
+                    "(course_id,user_id,user_time) ".
+                    "VALUES (?,?,?)";
+
+            /**
+             * 
+             */
+            $DB->execute($sql, [$course_id, $user_id, $user_time]);
+        }
+
+        /**
+         *
+         */
+        return(true);
     }
 
     /**
