@@ -16,12 +16,6 @@
 
 defined('MOODLE_INTERNAL') || exit(0);
 
-/**
- * @package local_bbliveusers
- * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
- * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
- * @license http://www.gnu.org/copyleft/gpl.html
- */
 $capabilities = array(
     'local/bbliveusers:export' => array(
         'riskbitmask' => RISK_CONFIG,
