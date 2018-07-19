@@ -35,3 +35,6 @@ $string['local_bbliveusers:export'] = 'Exportar';
 $string['bbliveusers:report'] = 'Reportar';
 $string['local/bbliveusers:report'] = 'Reportar';
 $string['local_bbliveusers:report'] = 'Reportar';
+$string['title_settings'] = 'Usuários ao Vivo - Configurações';
+$string['label_timeout'] = 'Tempo limite';
+$string['help_timeout'] = 'A quantidade de segundos que esse plugin rastreará usuários inativos. Se for inferior a 5 minutos, é exatamente como para o plugin nativo Usuários Online, se for muito alto, a vida útil da sessão do usuário será perpetuada, o que pode ser considerado uma falha de segurança.';

@@ -35,3 +35,6 @@ $string['local_bbliveusers:export'] = 'Export';
 $string['bbliveusers:report'] = 'Report';
 $string['local/bbliveusers:report'] = 'Report';
 $string['local_bbliveusers:report'] = 'Report';
+$string['title_settings'] = 'LiveUsers - Settings';
+$string['label_timeout'] = 'Timeout';
+$string['help_timeout'] = 'The amount of seconds that this plugin will track idle users. If lower than 5 minutes it\'s exactly like to OnlineUsers native plugin, if it\'s too high the user session lifetime will be perpetuated, which can be considered a security flaw.';
