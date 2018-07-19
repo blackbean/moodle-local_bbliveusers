@@ -28,10 +28,10 @@ function local_bbliveusers_extend_navigation_course() {
     if (isset($PAGE)) {
         $courseid = isset($COURSE->id) ? max(0, (integer)$COURSE->id) : 0;
         $userid = isset($USER->id) ? max(0, (integer)$USER->id) : 0;
-        if($timeout = get_config('local_bbliveusers', 'timeout')) {
+        if ($timeout = get_config('local_bbliveusers', 'timeout')) {
             $limit = intval(time() + max(0, intval($timeout)));
-        }else{
-            $limit = intval(time() +  max(0, intval($CFG->sessiontimeout)));
+        } else {
+            $limit = intval(time() + max(0, intval($CFG->sessiontimeout)));
         }
 
         echo("\n\n");

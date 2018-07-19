@@ -27,10 +27,10 @@ global $ADMIN, $CFG;
 
 // Verifying if we are within the site administration section
 // and, if true, registering this plug-in configuration page.
-if($hassiteconfig){
+if ($hassiteconfig) {
 
     // Creating this plug-in configuration page.
-    $settings = new admin_settingpage('local_bbliveusers_settings', 
+    $settings = new admin_settingpage('local_bbliveusers_settings',
                                       get_string('title_settings', 'block_bbliveusers'));
 
     // Creating this plug-in parameter input.
