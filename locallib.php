@@ -22,6 +22,10 @@
  */
 defined('MOODLE_INTERNAL') || exit(0);
 
+/**
+ * Core DAO class responsible for
+ * all data related operations.
+ */
 class bbliveusers
 {
     /**

@@ -22,6 +22,12 @@
  */
 defined('MOODLE_INTERNAL') || exit(0);
 
+/**
+ * This function is responsible for
+ * outputting the tracking routines.
+ *
+ * @return void
+ */
 function local_bbliveusers_extend_navigation_course() {
     global $COURSE, $USER, $PAGE, $CFG;
 

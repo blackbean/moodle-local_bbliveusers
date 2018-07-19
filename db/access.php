@@ -14,8 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @package local_bbliveusers
+ * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
+ * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
+ * @license http://www.gnu.org/copyleft/gpl.html
+ */
 defined('MOODLE_INTERNAL') || exit(0);
 
+// Defining this plug-in required permissions.
 $capabilities = array(
     'local/bbliveusers:export' => array(
         'riskbitmask' => RISK_CONFIG,
