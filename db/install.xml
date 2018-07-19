@@ -3,18 +3,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
-        <TABLE NAME="bbliveusers" COMMENT="">
+        <TABLE NAME="local_bbliveusers" COMMENT="">
             <FIELDS>
                 <FIELD NAME="courseid" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
                 <FIELD NAME="usertime" TYPE="int" LENGTH="20" UNSIGNED="true" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
             </FIELDS>
             <KEYS>
-                <KEY NAME="bbliveusers_a" TYPE="primary" FIELDS="courseid,userid,usertime" COMMENT=""/>
+                <KEY NAME="local_bbliveusers_a" TYPE="primary" FIELDS="courseid,userid,usertime" COMMENT=""/>
             </KEYS>
             <INDEXES>
-                <KEY NAME="bbliveusers_b" UNIQUE="false" FIELDS="usertime" COMMENT=""/>
-                <KEY NAME="bbliveusers_c" UNIQUE="false" FIELDS="courseid,usertime" COMMENT=""/>
+                <KEY NAME="local_bbliveusers_b" UNIQUE="false" FIELDS="usertime" COMMENT=""/>
+                <KEY NAME="local_bbliveusers_c" UNIQUE="false" FIELDS="courseid,usertime" COMMENT=""/>
             </INDEXES>
         </TABLE>
     </TABLES>

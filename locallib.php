@@ -48,13 +48,13 @@ class bbliveusers
         }
 
         $sql = "SELECT 1 ".
-                "FROM {bbliveusers} tb1 ".
+                "FROM {local_bbliveusers} tb1 ".
                 "WHERE tb1.courseid=? ".
                 "AND tb1.userid=? ".
                 "AND tb1.usertime=?";
 
         if ($DB->get_field_sql($sql, [$courseid, $userid, $usertime]) == false) {
-            $sql = "INSERT INTO {bbliveusers} ".
+            $sql = "INSERT INTO {local_bbliveusers} ".
                     "(courseid,userid,usertime) ".
                     "VALUES (?,?,?)";
 
@@ -85,7 +85,7 @@ class bbliveusers
 
         if ($courseid > 1) {
             $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "WHERE tb1.courseid=? ".
                     "AND tb1.usertime>=? ".
                     "AND tb1.usertime<=?";
@@ -93,7 +93,7 @@ class bbliveusers
             $params = [$courseid, $start, $stop];
         } else {
             $sql = "SELECT COUNT(DISTINCT tb1.userid) AS total ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "WHERE tb1.usertime>=? ".
                     "AND tb1.usertime<=?";
 
@@ -135,7 +135,7 @@ class bbliveusers
                         "MAX(tb1.usertime) AS last,".
                         "(MAX(tb1.usertime) - MIN(tb1.usertime)) AS total,".
                         "COUNT(DISTINCT tb1.usertime) AS count ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "INNER JOIN {user} tb2 ".
                     "ON tb2.id=tb1.userid ".
                     "WHERE tb1.courseid=? ".
@@ -155,7 +155,7 @@ class bbliveusers
                         "MAX(tb1.usertime) AS last,".
                         "(MAX(tb1.usertime) - MIN(tb1.usertime)) AS total,".
                         "COUNT(DISTINCT tb1.usertime) AS count ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "INNER JOIN {user} tb2 ".
                     "ON tb2.id=tb1.userid ".
                     "WHERE tb1.usertime>=? ".
@@ -211,7 +211,7 @@ class bbliveusers
                         "MIN(tb1.usertime) AS first,".
                         "MAX(tb1.usertime) AS last,".
                         "COUNT(DISTINCT tb1.userid) AS total ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "WHERE tb1.courseid=? ".
                     "AND tb1.usertime>=? ".
                     "AND tb1.usertime<=? ".
@@ -223,7 +223,7 @@ class bbliveusers
                         "MIN(tb1.usertime) AS first,".
                         "MAX(tb1.usertime) AS last,".
                         "COUNT(DISTINCT tb1.userid) AS total ".
-                    "FROM {bbliveusers} tb1 ".
+                    "FROM {local_bbliveusers} tb1 ".
                     "WHERE tb1.usertime>=? ".
                     "AND tb1.usertime<=? ".
                     "GROUP BY (tb1.usertime-(tb1.usertime%".$step."))";
