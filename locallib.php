@@ -145,7 +145,7 @@ class bbliveusers
                     "WHERE tb1.courseid=? ".
                     "AND tb1.usertime>=? ".
                     "AND tb1.usertime<=? ".
-                    "GROUP BY tb1.userid,".
+                    "GROUP BY tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
@@ -164,7 +164,7 @@ class bbliveusers
                     "ON tb2.id=tb1.userid ".
                     "WHERE tb1.usertime>=? ".
                     "AND tb1.usertime<=? ".
-                    "GROUP BY tb1.userid,".
+                    "GROUP BY tb2.id,".
                         "tb2.firstname,".
                         "tb2.lastname ".
                     "ORDER BY tb2.firstname";
