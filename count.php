@@ -25,11 +25,20 @@ define('AJAX_SCRIPT', true);
 require_once(__DIR__.'/../../config.php');
 require_once(__DIR__.'/locallib.php');
 
-require_login();
-
+// Reading and normalizing the
+// required necessary parameters.
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $limit = optional_param('limit', 60, PARAM_INT);
 $time = time();
+
+// Checking if the current
+// user is authenticated.
+require_login();
+
+// Checking if the authenticated user has the
+// required capability to access this live data.
+require_capability('local/bbliveusers:report', context_course::instance($courseid));
+
 $data = bbliveusers::count_liveusers($courseid, ($time - $limit), $time);
 
 header('HTTP/1.0 200 OK');
