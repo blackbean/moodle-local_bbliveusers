@@ -29,19 +29,19 @@ $capabilities = array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
-            'student' => CAP_DENY,
+            'student' => CAP_PROHIBIT,
             'manager' => CAP_ALLOW,
-            'editingteacher' => CAP_DENY,
-            'teacher' => CAP_DENY)
+            'editingteacher' => CAP_PREVENT,
+            'teacher' => CAP_PREVENT)
     ),
     'local/bbliveusers:report' => array(
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
-            'student' => CAP_DENY,
+            'student' => CAP_PROHIBIT,
             'manager' => CAP_ALLOW,
-            'editingteacher' => CAP_DENY,
-            'teacher' => CAP_DENY)
+            'editingteacher' => CAP_PREVENT,
+            'teacher' => CAP_PREVENT)
     )
 );
