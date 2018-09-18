@@ -31,16 +31,16 @@ if ($hassiteconfig) {
 
     // Creating this plug-in configuration page.
     $settings = new admin_settingpage('local_bbliveusers_settings',
-                                      get_string('title_settings', 'block_bbliveusers'));
+                                      get_string('title_settings', 'local_bbliveusers'));
 
     // Creating this plug-in parameter input.
     $settings->add(new admin_setting_configduration(
         // Registering this parameter key.
         'local_bbliveusers/timeout',
         // Registering this parameter name.
-        get_string('label_timeout', 'block_bbliveusers'),
+        get_string('label_timeout', 'local_bbliveusers'),
         // Registering this parameter help.
-        get_string('help_timeout', 'block_bbliveusers'),
+        get_string('help_timeout', 'local_bbliveusers'),
         // Registering this parameter value.
         $CFG->sessiontimeout,
         // Registering this parameter unit.
